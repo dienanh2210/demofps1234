@@ -7,9 +7,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class gunPlayer : MonoBehaviour {
     public int GameBullet = 35;
-  public int bulletgame =500;
+    public int GameBulletgun2 = 30;
+
+    public int bulletgame =500;
 
     public Text PointBullet;
+    public Text PointBulletgun2;
     public Text bulletpoint;
     int heathplayer=100;
     public GameObject heathpanel;
@@ -18,7 +21,7 @@ public class gunPlayer : MonoBehaviour {
 
     public float currentheath = 100;
     public Text heath;
-  static  int hea=100;
+   int hea=100;
 
     public Text point;
      int pointspider ;
@@ -31,10 +34,12 @@ public class gunPlayer : MonoBehaviour {
     public GameObject panelguide;
     public GameObject canvaspoint;
     public GameObject win;
+    public GameObject gameover;
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         player.SetActive(true);
+
         HeathBar.maxValue = heathplayer;//=mau mac dinh
         HeathBar.value = currentheath;//mau hien tai
         HeathBar.minValue = 0;
@@ -43,11 +48,12 @@ public class gunPlayer : MonoBehaviour {
         panelguide.SetActive(false);
         canvaspoint.SetActive(true);
         win.SetActive(false);
+        gameover.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha3))
         {
             panelboss.SetActive(true);
             canvaspoint.SetActive(false);
@@ -58,7 +64,7 @@ public class gunPlayer : MonoBehaviour {
             canvaspoint.SetActive(true);
         }
 
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.Alpha4))
         {
             panelguide.SetActive(true);
             canvaspoint.SetActive(false);
@@ -82,9 +88,26 @@ public class gunPlayer : MonoBehaviour {
     {
         bulletgame-=bullet;
         bulletpoint.text = "|" + bulletgame.ToString();
-
+        if (bulletgame <= 0)
+        {
+            bulletgame = 0;
+            bulletpoint.text = "|" + bulletgame.ToString();
+           
+        }
+        
 
     }
+    public void GetBulletgun2(int bullet2)
+    {
+        GameBulletgun2--;
+        PointBulletgun2.text = "Bullet:" + GameBulletgun2.ToString();
+
+    }
+
+
+
+
+
 
     public void Gethitplayer(int damge) {
 
@@ -95,23 +118,42 @@ public class gunPlayer : MonoBehaviour {
        // heathpanel.SetActive(true);
 
 
-        hea -= damge;
-        heath.text = "" + hea.ToString();
+      //  hea -= damge;
+        heath.text = "" + currentheath.ToString();
 
 
-        if (currentheath==0) {
+        if (currentheath <=0) {
+            currentheath = 0;
+            
+            heath.text = "" + currentheath.ToString();
+
             //  Instantiate(deadReplacement, transform.position, transform.rotation);  
             Instantiate(deadReplacement,transform.position,Quaternion.identity);
+            Invoke("Engame",3);
             
+            Invoke("Restartsgame",3);
             player.SetActive(false);
         }
 
 
 
     }
+
+    void Restartsgame() {
+
+
+        gameover.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        canvaspoint.SetActive(false);
+    }
+
+
+
+
     public void Engame() {
 
-        Time.timeScale = 0.001f;
+        Time.timeScale = 0;
 
 
     }
@@ -136,11 +178,11 @@ public class gunPlayer : MonoBehaviour {
         damgeboss += current;
         restboss.text = "" + damgeboss.ToString();
 
-        if (damgeboss==6) {
+        if (damgeboss>=6) {
 
             win.SetActive(true);
             canvaspoint.SetActive(false);
-            Invoke("LoadScene",2);
+           // Invoke("LoadScene",2);
         }
 
 
@@ -148,7 +190,8 @@ public class gunPlayer : MonoBehaviour {
 
     public void LoadScene() {
 
-
+        Application.LoadLevel("testscene");
+        Time.timeScale = 1;
     }
 
 

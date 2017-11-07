@@ -9,14 +9,15 @@ public class CameraZoom2 : MonoBehaviour {
     private bool zoomedIn = false;
     public GameObject gun1;
     public GameObject gun2;
+   
     private Vector3 olposition;
     
 
 	// Use this for initialization
 	void Start () {
-        gun1.SetActive(true);
+       gun1.SetActive(true);
         gun2.SetActive(false);
-       
+        
 
     }
 	
@@ -35,16 +36,22 @@ public class CameraZoom2 : MonoBehaviour {
        
         }
 
-        else
-        {
+        else 
+            {
 
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normal, Time.deltaTime * smooth);
-           gun1.SetActive(true);
+          gun1.SetActive(true);
 
            gun2.SetActive(false);
       
 
         }
+      
+
+
+
+
+
 
     }
 }

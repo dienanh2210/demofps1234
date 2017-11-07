@@ -15,23 +15,29 @@ public class boss : MonoBehaviour
     public bool isNotDead = true;
     int health = 50;
     float damageMin = 50;
-    int damge = 20;
+    int damge = 10;
     private GameObject player;
 
-    // public ParticleSystem par;
-    // public GameObject par;
-
-
+    public Slider sliderenemy;
+    public float currentheath = 50;
+    int heathenemy = 50;
     // Use this for initialization
-    void Start()
-    {
 
-        //  par.SetActive(false);
+    void Awake() {
 
         target = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
+
+
+    }
+    void Start()
+    {
+        
+        sliderenemy.maxValue = heathenemy;//=mau mac dinh
+        sliderenemy.value = currentheath;//mau hien tai
+        sliderenemy.minValue = 0;
     }
 
     // Update is called once per frame
@@ -52,7 +58,7 @@ public class boss : MonoBehaviour
 
 
             var distance = Vector3.Distance(target.position, myTransform.position);
-            if (distance < 2.0f)
+            if (distance < 4.0f)
             {
                 GetComponent<Animation>().Play("Attack");
                 //  player.GetComponent<gunPlayer>().heathpanel.SetActive(true);
@@ -97,10 +103,13 @@ public class boss : MonoBehaviour
     
     public void GetHit(int damge)
     {
+        currentheath -= damge;
 
+       // health -= damge;
+        sliderenemy.value = currentheath;
 
-        health -= damge;
-        if (health < 0)
+        //if (health < 0)
+        if (currentheath <=0)
         {
 
             Destroy(gameObject);

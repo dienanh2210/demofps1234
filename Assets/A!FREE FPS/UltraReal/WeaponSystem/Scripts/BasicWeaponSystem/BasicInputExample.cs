@@ -32,7 +32,7 @@ public class BasicInputExample : UltraRealMonobehaviorBase {
 
 		if (Input.GetButton ("Fire1") && launcher != null) {
 			launcher.Fire ();
-			anim.CrossFade ("Fire");
+		//	anim.CrossFade ("Fire");
             
 
 		}
@@ -42,7 +42,7 @@ public class BasicInputExample : UltraRealMonobehaviorBase {
 			audio.clip = otherClip;
 			audio.Play();
 
-			anim.CrossFade ("Reload");
+		//	anim.CrossFade ("Reload");
 			launcher.Reload ();
              
 		}

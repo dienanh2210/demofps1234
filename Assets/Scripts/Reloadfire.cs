@@ -15,15 +15,16 @@ public class Reloadfire : MonoBehaviour
   
     void Awake() {
         animation = GetComponent<Animation>();
-       // animation.CrossFade("TakeIn");
+
+       
         
     }
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
-        
+       
+
     }
     // Update is called once per frame
     void Update()
@@ -31,7 +32,7 @@ public class Reloadfire : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             animation.CrossFade("Fire");
-           
+
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
@@ -50,26 +51,27 @@ public class Reloadfire : MonoBehaviour
 
             }
 
-            //bullet 500
-
-            if (bullet==0) {
-              //  gameObject.GetComponent<Reloadfire>().enabled=false;
-                play.GetComponent<Gun>().enabled = true;
-            }
 
 
+            /* if (bullet==0) {
+               //  gameObject.GetComponent<Reloadfire>().enabled=false;
+                 play.GetComponent<Gun>().enabled = true;
+             }*/
 
-              animation.CrossFade("Reload");
-          
+
+
+            animation.CrossFade("Reload");
+
             player.GetComponent<gunPlayer>().GetBullet2(35 - GameBullet);
 
             player.GetComponent<gunPlayer>().GameBullet = 35;
 
-           /* AudioSource audio = GetComponent<AudioSource>();         
-            audio.clip = au;
-            audio.Play();*/
-           
+            /* AudioSource audio = GetComponent<AudioSource>();         
+             audio.clip = au;
+             audio.Play();*/
+
         }
+        
        
 
     }

@@ -8,18 +8,18 @@ public class Boss : MonoBehaviour {
     public bool isNotDead = true;
     public Transform myTransform;
     float rotationSpeed = 3;
-    private Animator anim;
+   // private Animator anim;
 
     // Use this for initialization
     void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        anim = GetComponent<Animator>();
+       // anim = GetComponent<Animator>();
 
 
-        anim.SetBool("Run",true);
-        anim.SetBool("Attack", false);
+      //  anim.SetBool("Run",true);
+       // anim.SetBool("Attack", false);
 
     }
 	// Update is called once per frame
@@ -39,13 +39,13 @@ public class Boss : MonoBehaviour {
             {
                  GetComponent<Animation>().Play("attk2");
                 //  player.GetComponent<gunPlayer>().heathpanel.SetActive(true);
-                anim.SetBool("Attack",true);
+              //  anim.SetBool("Attack",true);
             }
             else
             {
-               anim.SetBool("Attack", false);
+              // anim.SetBool("Attack", false);
                 agent.SetDestination(target.position);
-            anim.SetBool("Run", true);
+          //  anim.SetBool("Run", true);
             //  GetComponent<Animation>().Play("run");
             //  player.GetComponent<gunPlayer>().heathpanel.SetActive(false);
             // player.gameObject.GetComponent<gunPlayer>().heathpanel.SetActive(false);

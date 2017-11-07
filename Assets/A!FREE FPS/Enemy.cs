@@ -18,19 +18,24 @@ public class Enemy : MonoBehaviour {
     int damge = 5;
     private GameObject player;
 
-    // public ParticleSystem par;
-   // public GameObject par;
-   
-
+    public Slider sliderenemy;
+    public float currentheath = 5;
+    int heathenemy = 5;
     // Use this for initialization
-    void Start () {
-
-      //  par.SetActive(false);
+    void Awake() {
 
         target = GameObject.FindWithTag("Player").transform;
-        agent = GetComponent< UnityEngine.AI.NavMeshAgent > ();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
-     
+
+    }
+    void Start () {
+
+       // sliderenemy.maxValue = heathenemy;//=mau mac dinh
+        sliderenemy.value = currentheath;//mau hien tai
+        sliderenemy.minValue = 0;
+
+
     }
 	
 	// Update is called once per frame
@@ -92,13 +97,13 @@ public class Enemy : MonoBehaviour {
 
     public void GetHit(int damge) {
 
+        currentheath -= damge;
+        sliderenemy.value = currentheath;
 
         
-       
-
-
-        health -= damge;
-        if (health<0) {
+        if (currentheath <= 0)
+        {
+           // currentheath = 0;
 
             Destroy(gameObject);
 

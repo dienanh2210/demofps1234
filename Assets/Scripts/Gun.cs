@@ -23,8 +23,10 @@ public class Gun : MonoBehaviour {
 
     //public GameObject Gethit;
     public GameObject par;
-    public GameObject parboss;
-    public GameObject parboss2;
+    
+
+
+    
     // Use this for initialization
     void Start () {
         
@@ -47,55 +49,56 @@ public class Gun : MonoBehaviour {
         }
 
     }
-    
+
     public void Fire()
 
-        {
+    {
 
         if (Time.time >= lastFireTime + firetime)
-           {
+        {
             AudioSource audio = GetComponent<AudioSource>();
-            
+
             // yield return new WaitForSeconds(audio.clip.length);
             audio.clip = otherClip;
             audio.Play();
 
-           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-              //  Ray ray = new Ray(transform.position, transform.forward);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //  Ray ray = new Ray(transform.position, transform.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
 
                 Debug.Log("hit");
-                    bullet2 -= damge;
+                bullet2 -= damge;
                 player.GetComponent<gunPlayer>().GetBullet(1);
 
-                    if (bullet2 == 0)
-                    {
+                if (bullet2 == 0)
+                {
 
-                        gameObject.GetComponent<Gun>().enabled = false;
+                    gameObject.GetComponent<Gun>().enabled = false;
 
-                    }
-                      if (bullet2 > 1)
-                      {
+                }
+                if (bullet2 > 1)
+                {
 
-                              gameObject.GetComponent<Gun>().enabled = true;
+                    gameObject.GetComponent<Gun>().enabled = true;
 
-                      }
-              GameObject ab= Instantiate(SmokeOuthit,hit.point, Quaternion.identity);
-              
-                   
+                }
+                GameObject ab = Instantiate(SmokeOuthit, hit.point, Quaternion.identity);
+
+
                 // Instantiate(smoke,transform.position,Quaternion.identity);
-                if (hit.transform.tag.Equals("Enemy")) {
+                if (hit.transform.tag.Equals("Enemy"))
+                {
 
                     Instantiate(lightbullet, transform.position, Quaternion.identity);
                     //  GameObject bc= Instantiate(par,hit.transform.position,Quaternion.identity);
                     GameObject bc = Instantiate(par, hit.point, Quaternion.identity);
                     hit.transform.gameObject.GetComponent<Enemy>().GetHit(damge);
-                  //  hit.transform.gameObject.GetComponent<boss>().GetHit(damge);
+                    //  hit.transform.gameObject.GetComponent<boss>().GetHit(damge);
 
                     Debug.Log("hitenemy");
-                    Destroy(ab);        
+                    Destroy(ab);
                 }
                 if (hit.transform.tag.Equals("Boss"))
                 {
@@ -103,7 +106,7 @@ public class Gun : MonoBehaviour {
                     GameObject a = Instantiate(par, hit.point, Quaternion.identity);
                     // GameObject bc = Instantiate(par, parboss.transform.position, Quaternion.identity);
                     hit.transform.gameObject.GetComponent<boss>().GetHit(damge);
-                   
+
                     Debug.Log("hitenemy");
                     Destroy(ab);
                 }
@@ -121,7 +124,7 @@ public class Gun : MonoBehaviour {
 
 
             }
-                UpdateFireTime();
+            UpdateFireTime();
         }
 
     }

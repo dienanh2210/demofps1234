@@ -33,9 +33,9 @@ public class Weapons : MonoBehaviour {
 
 		for (int i=0; i < nrWeapons; i++)    {
 			if (i == index) {
-				weapons[i].gameObject.SetActive(true);
+				//weapons[i].gameObject.SetActive(true);
 			} else { 
-				weapons[i].gameObject.SetActive(false);
+				//weapons[i].gameObject.SetActive(false);
 			}
 		}
 	}

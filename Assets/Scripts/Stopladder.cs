@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stopladder : MonoBehaviour {
     private GameObject ladder;
     private GameObject player;
-    float speed = 3;
+    float speed = 1;
 	// Use this for initialization
 	void Start () {
 		ladder=GameObject.FindGameObjectWithTag("Ladder");
@@ -25,7 +25,7 @@ public class Stopladder : MonoBehaviour {
            
             float h = Input.GetAxis("Vertical") * speed;
             Debug.Log("ladder");
-            player.transform.Translate (new Vector3(0,0,1));
+            player.transform.Translate (new Vector3(0,0,h));
             //  player.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0)*1;
             //player.GetComponent<Rigidbody>().velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))*1;
         }

@@ -9,9 +9,9 @@ public class Ladder : MonoBehaviour {
   public  bool canClimb = false;
     private Vector3 moveDirection;
 
-
+   
     void Start () {
-        
+       
 	}
 
     void OnTriggerEnter(Collider Collider)
@@ -38,14 +38,20 @@ public class Ladder : MonoBehaviour {
         if (canClimb)
         {
 
+            
+
+                float x = Input.GetAxis("Horizontal") * speed;
+                float h = Input.GetAxis("Vertical") * speed;
+            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") > 0)
+            {
+                // player.transform.Translate (new Vector3(0,h,0));
+                player.GetComponent<Rigidbody>().velocity = new Vector3(-x, h, 0) * 20;
+            }
+            else {
+                player.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
 
-           float x = Input.GetAxis("Horizontal")*speed;
-               float h = Input.GetAxis("Vertical") *speed;
-
-            // player.transform.Translate (new Vector3(0,h,0));
-             player.GetComponent<Rigidbody>().velocity = new Vector3(-x,h,0)*20;
-           
+            }
 
 
         }
